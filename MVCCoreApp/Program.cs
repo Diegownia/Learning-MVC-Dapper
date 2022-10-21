@@ -1,4 +1,8 @@
-using MVCCoreApp;
+using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.DependencyInjection;
+using MVCCoreApp.Interfaces;
+using MVCCoreApp.Services;
+using System.Data;
 
 internal class Program
 {
@@ -7,7 +11,8 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddSingleton<AppointmentsDbContext>();
+        builder.Services.AddTransient<IDbConnection>(s => new SqliteConnection("Data Source=d:\\appointmentDb.db;Version=3;"));
+        builder.Services.AddSingleton<IModelService, ModelService>();
         builder.Services.AddControllersWithViews();
 
 

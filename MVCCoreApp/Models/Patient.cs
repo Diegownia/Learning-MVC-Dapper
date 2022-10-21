@@ -1,7 +1,7 @@
 ﻿using Dapper.Contrib.Extensions;
-using MVCCoreApp.Models;
+using MVCCoreApp.Interfaces;
 
-namespace MVCCoreApp.Interfaces
+namespace MVCCoreApp.Models
 {
     public class Patient : BaseModel, IPatient
     {
