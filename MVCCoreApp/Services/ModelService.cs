@@ -41,15 +41,16 @@ namespace MVCCoreApp.Services
             return data;
         }
 
-        public async Task<T> Show<T>(int id) where T : IBaseModel
+        public async Task<T> Show<T>(int id) where T : class, IBaseModel
         {
             T? model = default;
             _connection.Open();
 
             try
             {
-                model = await _connection.QuerySingleOrDefaultAsync<T>(
-                    $"SELECT * FROM {typeof(T).Name} WHERE {nameof(IBaseModel.Id)} = {id};");
+                model = await _connection.GetAsync<T>(id);
+                //model = await _connection.QuerySingleOrDefaultAsync<T>(
+                //    $"SELECT * FROM {typeof(T).Name} WHERE {nameof(IBaseModel.Id)} = {id};");
             }
             finally
             {
@@ -58,14 +59,19 @@ namespace MVCCoreApp.Services
             return model;
         }
 
-        public async Task<T> Edit<T>(int id) where T : IBaseModel
-        {
-            return await Show<T>(id);
-        }
+        //public async Task<T> Edit<T>(int id) where T : class, IBaseModel
+        //{
+        //    return await Show<T>(id);
+        //}
 
         public async Task Update<T>(T model) where T : class, IBaseModel
         {
             await _connection.UpdateAsync(model);
+        }
+
+        public async Task Delete<T>(T model) where T : class, IBaseModel
+        {
+            await _connection.DeleteAsync(model);
         }
     }
 }
