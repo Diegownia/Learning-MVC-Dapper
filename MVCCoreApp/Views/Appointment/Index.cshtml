@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<Patient>
+﻿@model IEnumerable<Patient>
 
 
 
@@ -18,7 +17,36 @@
 
     @if(Model.Count() > 0)
     {
-        
+        <table class=" table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Surname
+                    </th>
+                    <th>
+                        Next Visit
+                    </th>
+                    <th>
+                        Last Visit
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td width="20%"></td>
+                        <td width="20%">@item.Name</td>
+                        <td width="20%">@item.Surname</td>
+                        <td width="20%">@item.NextVisit</td>
+                        <td width="20%">@item.LastVisit</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
 
     <br />

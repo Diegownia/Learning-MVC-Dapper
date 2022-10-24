@@ -16,8 +16,8 @@ namespace MVCCoreApp.Controllers
 
         public IActionResult Index()
         {
-            var view = _connection.Index<Patient>();
-            return View(view);
+            _connection.Index<Patient>();
+            return View();
         }
     }
 }
