@@ -11,7 +11,7 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddTransient<IDbConnection>(s => new SqliteConnection("Data Source=d:\\appointmentDb.db;Version=3;"));
+        builder.Services.AddTransient<IDbConnection>(s => new SqliteConnection("Data Source=d:\\appointmentDb.db;"));
         builder.Services.AddSingleton<IModelService, ModelService>();
         builder.Services.AddControllersWithViews();
 
