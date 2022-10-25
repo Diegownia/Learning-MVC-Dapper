@@ -7,7 +7,14 @@ namespace MVCCoreApp.Models
         public string? Name { get; set; }
         public string? Surname { get; set; }
         public TimeSpan WorkingHours { get; set; }
-        public Specialisations? SpecialisationsId { get; set; }
+
+        //Relationships
+        //Doctor can have multiple specialisations
+        public IList<Specialisations>? Specialisations { get; set; }
+
+        //Many to Many with Patient [special model to represent that relation was made]
+
+        public IList<PatientDoctor>? DoctorPatient { get; set; }
 
     }
 }

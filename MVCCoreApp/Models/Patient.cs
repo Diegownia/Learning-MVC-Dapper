@@ -17,5 +17,8 @@ namespace MVCCoreApp.Models
         public DateTime? NextVisit { get; set; }
 
         public DateTime? LastVisit { get; set; }
+
+        public IList<PatientDoctor>? PatientDoctors { get; set; }
+
     }
 }
