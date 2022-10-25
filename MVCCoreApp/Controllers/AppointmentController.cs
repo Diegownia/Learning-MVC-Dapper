@@ -36,5 +36,11 @@ namespace MVCCoreApp.Controllers
             await _connection.Store(model);
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Edit(Patient model)
+        {
+            await _connection.Update(model);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
