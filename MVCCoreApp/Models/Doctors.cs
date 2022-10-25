@@ -1,6 +1,4 @@
-﻿using MVCCoreApp.Interfaces;
-
-namespace MVCCoreApp.Models
+﻿namespace MVCCoreApp.Models
 {
     public class Doctors : BaseModel
     {
