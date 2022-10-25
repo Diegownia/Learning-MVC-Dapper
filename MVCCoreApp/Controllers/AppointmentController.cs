@@ -21,5 +21,20 @@ namespace MVCCoreApp.Controllers
 
             return View(index);
         }
+
+        // GET: AppointmentController/Create
+        public async Task<IActionResult> Create()
+        {
+            var model = await _connection.Create<Patient>();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Patient model)
+        {
+            await _connection.Store(model);
+            return RedirectToAction("Index");
+        }
     }
 }

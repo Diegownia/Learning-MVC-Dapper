@@ -7,5 +7,6 @@
         Task<IEnumerable<T>> Index<T>() where T : class, IBaseModel;
         Task<T> Show<T>(int id) where T : class, IBaseModel;
         Task Update<T>(T model) where T : class, IBaseModel;
+        Task<T> Store<T>(T model) where T : class, IBaseModel;
     }
 }

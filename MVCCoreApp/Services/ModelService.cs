@@ -59,6 +59,13 @@ namespace MVCCoreApp.Services
             return model;
         }
 
+        public async Task<T> Store<T>(T model) where T : class, IBaseModel
+        {
+            await _connection.InsertAsync(model);
+
+            return model;
+        }
+
         //public async Task<T> Edit<T>(int id) where T : class, IBaseModel
         //{
         //    return await Show<T>(id);
