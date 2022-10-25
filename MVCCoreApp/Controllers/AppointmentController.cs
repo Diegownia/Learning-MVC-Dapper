@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using MVCCoreApp.Interfaces;
 using MVCCoreApp.Models;
 
@@ -14,10 +15,11 @@ namespace MVCCoreApp.Controllers
             _connection = connection;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            _connection.Index<Patient>();
-            return View();
+            var index = await _connection.Index<Patient>();
+
+            return View(index);
         }
     }
 }

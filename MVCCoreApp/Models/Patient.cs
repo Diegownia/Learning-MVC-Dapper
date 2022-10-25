@@ -11,7 +11,7 @@ namespace MVCCoreApp.Models
         [Computed]
         public string FullName
         {
-            get => Name + Surname;
+            get => Name + " " + Surname;
         }
 
         public DateTime? NextVisit { get; set; }
