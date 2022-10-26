@@ -1,6 +1,6 @@
 ﻿namespace MVCCoreApp.Models
 {
-    public class Doctors : BaseModel
+    public class Doctor : BaseModel
     {
         public string? Name { get; set; }
         public string? Surname { get; set; }
