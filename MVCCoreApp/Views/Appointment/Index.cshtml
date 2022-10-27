@@ -35,7 +35,9 @@
                 @foreach(var item in Model)
                 {
                     <tr>
-                        <td width="20%">@item.Name</td>
+                        <td width="20%">
+                            <a asp-controller="Appointment" asp-action="Details" class="link-dark">@item.Name</a>
+                         </td>
                         <td width="20%">@item.Surname</td>
                         <td width="20%">@item.FullName</td>
                     </tr>
