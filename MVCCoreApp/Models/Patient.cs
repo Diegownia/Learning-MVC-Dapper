@@ -1,5 +1,6 @@
 ﻿using Dapper.Contrib.Extensions;
 using MVCCoreApp.Interfaces;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVCCoreApp.Models
 {
@@ -13,10 +14,7 @@ namespace MVCCoreApp.Models
         {
             get => Name + " " + Surname;
         }
-
-        public DateTime? NextVisit { get; set; }
-
-        public DateTime? LastVisit { get; set; }
+        public IList<Visit>? Visits { get; set; }
 
         public IList<PatientDoctor>? PatientDoctors { get; set; }
 
