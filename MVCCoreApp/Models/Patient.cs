@@ -14,8 +14,9 @@ namespace MVCCoreApp.Models
         {
             get => Name + " " + Surname;
         }
-        public IList<Visit>? Visits { get; set; }
-
+        [Computed]
+        public IList<Visit>? Visit { get; set; }
+        [Computed]
         public IList<PatientDoctor>? PatientDoctors { get; set; }
 
     }

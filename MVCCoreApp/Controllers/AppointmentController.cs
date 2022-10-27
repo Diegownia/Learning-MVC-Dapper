@@ -8,7 +8,7 @@ namespace MVCCoreApp.Controllers
     public class AppointmentController : Controller
     {
 
-        private IModelService _connection;
+        private readonly IModelService _connection;
 
         public AppointmentController(IModelService connection)
         {
