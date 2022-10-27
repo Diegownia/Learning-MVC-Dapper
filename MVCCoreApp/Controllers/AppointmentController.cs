@@ -22,6 +22,12 @@ namespace MVCCoreApp.Controllers
             return View(index);
         }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            var detail = await _connection.Show<Patient>(id);
+            return View(detail);
+        }
+
         // GET: AppointmentController/Create
         public async Task<IActionResult> Create()
         {
@@ -37,10 +43,10 @@ namespace MVCCoreApp.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Edit(Patient model)
+        public async Task<IActionResult> Edit(int Id)
         {
-            await _connection.Update(model);
-            return RedirectToAction(nameof(Index));
+            await _connection.Edit<Patient>(Id);
+            return View();
         }
     }
 }

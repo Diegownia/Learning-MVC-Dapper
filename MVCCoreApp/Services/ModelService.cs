@@ -80,5 +80,10 @@ namespace MVCCoreApp.Services
         {
             await _connection.DeleteAsync(model);
         }
+
+        public async Task<T> Edit<T>(int id) where T : class, IBaseModel
+        {
+            return await Show<T>(id);
+        }
     }
 }
