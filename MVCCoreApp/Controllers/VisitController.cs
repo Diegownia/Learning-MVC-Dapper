@@ -32,7 +32,6 @@ namespace MVCCoreApp.Controllers
         // GET: VisitController/Create
         public async Task<IActionResult> Create()
         {
-            await GetPatient();
             var model = await _connection.Create<Visit>();
             model.Patients = await PopulateList();
             return View(model);
@@ -94,17 +93,6 @@ namespace MVCCoreApp.Controllers
             {
                 return View();
             }
-        }
-
-        private async Task GetPatient()
-        {
-            var patientIndex = await _connection.Index<Patient>();
-
-            var selectListItems = patientIndex.Select(p => new SelectListItem
-            {
-                Value = p.Id.ToString(),
-                Text = p.Name
-            });
         }
 
         private async Task<IList<SelectListItem>> PopulateList()
