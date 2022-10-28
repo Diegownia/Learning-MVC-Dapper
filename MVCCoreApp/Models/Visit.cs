@@ -1,4 +1,6 @@
-﻿using MVCCoreApp.Interfaces;
+﻿using Dapper.Contrib.Extensions;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using MVCCoreApp.Interfaces;
 
 namespace MVCCoreApp.Models
 {
@@ -6,5 +8,8 @@ namespace MVCCoreApp.Models
     {
         public DateTime VisitDate { get; set; }
         public Patient? Patient { get; set; }
+
+        [Computed]
+        public IList<SelectListItem>? Patients { get; set; }
     }
 }

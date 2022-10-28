@@ -34,6 +34,7 @@ namespace MVCCoreApp.Controllers
         {
             await GetPatient();
             var model = await _connection.Create<Visit>();
+            model.Patients = await PopulateList();
             return View(model);
         }
 
@@ -99,13 +100,24 @@ namespace MVCCoreApp.Controllers
         {
             var patientIndex = await _connection.Index<Patient>();
 
-            IEnumerable<SelectListItem> patietnts = patientIndex.Select(p => new SelectListItem
+            var selectListItems = patientIndex.Select(p => new SelectListItem
             {
                 Value = p.Id.ToString(),
                 Text = p.Name
             });
+        }
 
-            ViewBag.Patient = patietnts;
+        private async Task<IList<SelectListItem>> PopulateList()
+        {
+            var patientIndex = await _connection.Index<Patient>();
+
+            var selectListItems = patientIndex.Select(p => new SelectListItem
+            {
+                Value = p.Id.ToString(),
+                Text = p.Name
+            }).ToList();
+
+            return selectListItems;
         }
     }
 }
