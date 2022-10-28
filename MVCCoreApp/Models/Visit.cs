@@ -10,6 +10,6 @@ namespace MVCCoreApp.Models
         public Patient? Patient { get; set; }
 
         [Computed]
-        public IList<SelectListItem>? Patients { get; set; }
+        public IEnumerable<SelectListItem>? Patients { get; set; }
     }
 }
