@@ -28,7 +28,8 @@ namespace MVCCoreApp.Controllers
             var visits = _mapper.Map<List<VisitViewModel>>(index);
             foreach (var visit in visits)
             {
-                visit.PatientName = patients.FirstOrDefault(p => p.Id == visit.PatientId)?.FullName ?? string.Empty;
+                visit.PatientName = patients.FirstOrDefault(p => p.Id == visit.PatientId)?
+                    .FullName ?? string.Empty;
             }
             return View(visits);
         }
