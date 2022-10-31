@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MVCCoreApp.Interfaces;
 using MVCCoreApp.Models;
+using MVCCoreApp.ViewModels;
 
 namespace MVCCoreApp.Controllers
 {
@@ -32,16 +33,21 @@ namespace MVCCoreApp.Controllers
         // GET: VisitController/Create
         public async Task<IActionResult> Create()
         {
-            var model = await _connection.Create<Visit>();
-            model.Patients = await PopulateList();
-            return View(model);
+            var vm = new VisitViewModel();
+            vm.Patients = await GetPatientList();
+            return View(vm);
         }
 
         // POST: VisitController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Visit model)
+        public async Task<IActionResult> Create(VisitViewModel vm)
         {
+            var model = new Visit
+            {
+                VisitDate = vm.VisitDate,
+                PatientId = vm.PatientId
+            };
             var stored = await _connection.Store(model);
             try
             {
@@ -95,7 +101,7 @@ namespace MVCCoreApp.Controllers
             }
         }
 
-        private async Task<IList<SelectListItem>> PopulateList()
+        private async Task<IList<SelectListItem>> GetPatientList()
         {
             var patientIndex = await _connection.Index<Patient>();
 

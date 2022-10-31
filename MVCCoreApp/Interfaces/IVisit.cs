@@ -2,9 +2,9 @@
 
 namespace MVCCoreApp.Interfaces
 {
-    public interface IVisit
+    public interface IVisit : IBaseModel
     {
-        Patient? Patient { get; set; }
+        int PatientId { get; set; }
         DateTime VisitDate { get; set; }
     }
 }
