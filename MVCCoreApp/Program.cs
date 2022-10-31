@@ -1,9 +1,9 @@
+using AutoMapper;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MVCCoreApp.Interfaces;
 using MVCCoreApp.Services;
-using MVCCoreApp.ViewModels;
 using System.Data;
 
 internal class Program

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MVCCoreApp.Interfaces;
@@ -9,12 +10,14 @@ namespace MVCCoreApp.Controllers
 {
     public class VisitController : Controller
     {
-
         private readonly IModelService _connection;
+        private readonly IMapper _mapper;
 
         public VisitController(IModelService connection)
         {
             _connection = connection;
+            var mc = new MapperConfiguration(c => c.CreateMap(typeof(VisitViewModel), typeof(Visit)));
+            _mapper = mc.CreateMapper();
         }
 
         // GET: VisitController
@@ -43,12 +46,9 @@ namespace MVCCoreApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(VisitViewModel vm)
         {
-            var model = new Visit
-            {
-                VisitDate = vm.VisitDate,
-                PatientId = vm.PatientId
-            };
-            var stored = await _connection.Store(model);
+            var destination = new Visit();
+            destination = (Visit)_mapper.Map(vm, destination, typeof(VisitViewModel), typeof(Visit));
+            var stored = await _connection.Store(destination);
             try
             {
                 return RedirectToAction(nameof(Index));
