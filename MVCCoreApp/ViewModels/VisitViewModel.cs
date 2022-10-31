@@ -8,8 +8,9 @@ namespace MVCCoreApp.ViewModels
     public class VisitViewModel : IVisitViewModel
     {
         public DateTime VisitDate { get; set; }
+        [DisplayName("Patient Details")]
         public int PatientId { get; set; }
-        [DisplayName ("Patient Details")]
+        public string PatientName { get; set; }
         public IEnumerable<SelectListItem>? Patients { get; set; }
 
     }

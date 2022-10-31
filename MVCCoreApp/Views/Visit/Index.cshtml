@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVCCoreApp.Models.Visit>
+﻿@model IEnumerable<MVCCoreApp.ViewModels.VisitViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -28,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.VisitDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PatientId)
+                @Html.DisplayFor(modelItem => item.PatientName)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

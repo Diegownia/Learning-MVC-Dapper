@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MVCCoreApp.Interfaces;
 using MVCCoreApp.Models;
 using MVCCoreApp.ViewModels;
+using System.Linq;
 
 namespace MVCCoreApp.Controllers
 {
@@ -13,18 +14,23 @@ namespace MVCCoreApp.Controllers
         private readonly IModelService _connection;
         private readonly IMapper _mapper;
 
-        public VisitController(IModelService connection)
+        public VisitController(IModelService connection, IMapper mapper)
         {
             _connection = connection;
-            var mc = new MapperConfiguration(c => c.CreateMap(typeof(VisitViewModel), typeof(Visit)));
-            _mapper = mc.CreateMapper();
+            _mapper = mapper;
         }
 
         // GET: VisitController
         public async Task<IActionResult>Index()
         {
             var index = await _connection.Index<Visit>();
-            return View(index);
+            var patients = await _connection.Index<Patient>();
+            var visits = _mapper.Map<List<VisitViewModel>>(index);
+            foreach (var visit in visits)
+            {
+                visit.PatientName = patients.FirstOrDefault(p => p.Id == visit.PatientId)?.FullName ?? string.Empty;
+            }
+            return View(visits);
         }
 
         // GET: VisitController/Details/5
@@ -47,7 +53,7 @@ namespace MVCCoreApp.Controllers
         public async Task<IActionResult> Create(VisitViewModel vm)
         {
             var destination = new Visit();
-            destination = (Visit)_mapper.Map(vm, destination, typeof(VisitViewModel), typeof(Visit));
+            destination = _mapper.Map<Visit>(vm);
             var stored = await _connection.Store(destination);
             try
             {

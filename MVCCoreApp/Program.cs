@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using MVCCoreApp.Data;
 using MVCCoreApp.Interfaces;
 using MVCCoreApp.Services;
 using System.Data;
@@ -13,9 +14,12 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+        
         builder.Services.AddTransient<IDbConnection>(s => new SqliteConnection("Data Source=d:\\appointmentDb.db;"));
         builder.Services.AddSingleton<IModelService, ModelService>();
+        builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
         builder.Services.AddControllersWithViews();
+        
 
 
         var app = builder.Build();
