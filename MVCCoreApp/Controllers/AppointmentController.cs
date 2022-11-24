@@ -43,10 +43,31 @@ namespace MVCCoreApp.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Edit(int Id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? Id)
         {
             await _connection.Edit<Patient>(Id);
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int? Id,Patient patient)
+        {
+            if (Id == null) { return NotFound(); }
+            var model = await _connection.Edit<Patient>(Id);
+
+            await TryUpdateModelAsync(model);
+            await _connection.Update(model);
+
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View(patient);
+            }
         }
     }
 }

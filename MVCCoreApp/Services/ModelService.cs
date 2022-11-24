@@ -41,7 +41,7 @@ namespace MVCCoreApp.Services
             return data;
         }
 
-        public async Task<T> Show<T>(int id) where T : class, IBaseModel
+        public async Task<T> Show<T>(int? id) where T : class, IBaseModel
         {
             T? model = default;
             _connection.Open();
@@ -76,7 +76,7 @@ namespace MVCCoreApp.Services
             await _connection.DeleteAsync(model);
         }
 
-        public async Task<T> Edit<T>(int id) where T : class, IBaseModel
+        public async Task<T> Edit<T>(int? id) where T : class, IBaseModel
         {
             return await Show<T>(id);
         }
